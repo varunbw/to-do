@@ -16,7 +16,6 @@ body {
 
 .top-nav h1 {
     margin: 0;
-    font-size: 1.5rem;
 }
 
 /* Layout container */
@@ -30,8 +29,9 @@ body {
 /* Right navigation bar */
 .left-nav {
     background-color: #f8f9fa;
-    width: 250px;
+    width: 200px;
     padding: 20px;
+    padding-top: 0px;
     box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -40,6 +40,7 @@ body {
     flex: 1;
     background-color: #e9ecef;
     padding: 20px;
+    padding-top: 0px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;

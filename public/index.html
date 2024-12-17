@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 
+<!-- CSS File -->
 <link rel="stylesheet" href="index.css">
 
 <!-- Latest compiled and minified CSS -->
@@ -17,7 +18,7 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
 
-<body>
+<body onload="fetchTasks()">
     <!-- Top Navigation Bar -->
     <div class="top-nav d-flex align-items-center justify-content-between">
         <h1>To Do</h1>
@@ -27,7 +28,7 @@
     <div class="layout-container">
         <!-- Left Navigation Bar -->
         <div class="left-nav">
-            <h3>Navigation</h3>
+            <h2>Navigation</h2>
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link active" href="#">All Tasks</a>
@@ -73,3 +74,6 @@
     </div>
 </body>
 </html>
+
+<!-- JavaScript -->
+<script src="js/index.js"></script>

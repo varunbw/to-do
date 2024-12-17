@@ -1,0 +1,42 @@
+[
+    {
+        "title": "Complete project report",
+        "due_date": "2024-12-20",
+        "complete_by_target": "2024-12-22",
+        "priority": "high",
+        "completed": false,
+        "uuid": "a2e1b5b9-11e5-4d6a-8d32-01a3d27c86b3"
+    },
+    {
+        "title": "Schedule team meeting",
+        "due_date": "2024-12-18",
+        "complete_by_target": "2024-12-19",
+        "priority": "medium",
+        "completed": true,
+        "uuid": "c18db9e7-6cb5-48b3-a9a9-d2a30a1cf9fa"
+    },
+    {
+        "title": "Update website content",
+        "due_date": "2024-12-25",
+        "complete_by_target": "2024-12-28",
+        "priority": "low",
+        "completed": false,
+        "uuid": "fbf88a1e-1db4-467e-b40d-75e19ab1c953"
+    },
+    {
+        "title": "Client feedback review",
+        "due_date": "2024-12-21",
+        "complete_by_target": "2024-12-23",
+        "priority": "high",
+        "completed": false,
+        "uuid": "5e5a7a73-e07b-4b38-a2ae-b4a5cc1fe98a"
+    },
+    {
+        "title": "Finalize budget for Q1",
+        "due_date": "2024-12-22",
+        "complete_by_target": "2024-12-24",
+        "priority": "medium",
+        "completed": true,
+        "uuid": "303e93ea-420b-4c35-8f52-059fadd424dd"
+    }
+]
