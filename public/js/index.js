@@ -1,5 +1,5 @@
 // Function to fetch tasks from local JSON file
-async function fetchTasks() {
+async function FetchTasks() {
     console.log('here');
     
 	try {
@@ -8,14 +8,14 @@ async function fetchTasks() {
 			throw new Error("Failed to load tasks.json");
 		}
 		const data = await response.json(); // Parse JSON file
-		renderTasks(data); // Pass tasks array to rendering function
+		RenderTasks(data); // Pass tasks array to rendering function
 	} catch (error) {
 		console.error("Error:", error);
 	}
 }
 
 // Function to render tasks dynamically
-function renderTasks(tasks) {
+function RenderTasks(tasks) {
 
     // Get `content` div
 	const contentDiv = document.querySelector(".content");
@@ -49,8 +49,8 @@ function renderTasks(tasks) {
 		const datesDiv = document.createElement("div");
 		datesDiv.classList.add("task-dates");
 		datesDiv.innerHTML = `
-          <div>Due: ${formatDate(task.due_date)}</div>
-          <div>Complete by: ${formatDate(task.complete_by_target)}</div>`;
+          <div>Due: ${FormatDate(task.due_date)}</div>
+          <div>Complete by: ${FormatDate(task.complete_by_target)}</div>`;
 
         // Append task-title and task-dates to task-content
 		taskContentDiv.appendChild(titleDiv);
@@ -59,8 +59,8 @@ function renderTasks(tasks) {
 		// task-priority div
 		const priorityDiv = document.createElement("div");
 		priorityDiv.classList.add("task-priority");
-		priorityDiv.classList.add(getPriorityClass(task.priority));
-		priorityDiv.title = `${capitalize(task.priority)} Priority`;
+		priorityDiv.classList.add(GetPriorityClass(task.priority));
+		priorityDiv.title = `${CapitalizeString(task.priority)} Priority`;
 
 		// Append all divs to the task-card div
 		taskCard.appendChild(checkboxDiv);
@@ -73,7 +73,7 @@ function renderTasks(tasks) {
 }
 
 // Helper function: Map priority to a CSS class
-function getPriorityClass(priority) {
+function GetPriorityClass(priority) {
 	switch (priority) {
 		case "high":
 			return "tp-high";
@@ -87,12 +87,12 @@ function getPriorityClass(priority) {
 }
 
 // Helper function: Capitalize a string
-function capitalize(str) {
+function CapitalizeString(str) {
 	return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 // Helper function: Format date to DD/MM/YYYY
-function formatDate(dateString) {
+function FormatDate(dateString) {
 	const date = new Date(dateString);
 	return date.toLocaleDateString("en-GB"); // Returns in "DD/MM/YYYY" format
 }
