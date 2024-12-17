@@ -30,6 +30,9 @@
             <h3>Navigation</h3>
             <ul class="nav flex-column">
                 <li class="nav-item">
+                    <a class="nav-link active" href="#">All Tasks</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" href="#">Dashboard</a>
                 </li>
                 <li class="nav-item">
@@ -47,6 +50,25 @@
         <!-- Main Content Area -->
         <div class="content">
             <h2>Your Tasks</h2>
+
+            <div class="task-card">
+                <!-- Left Side: Task Completion Checkbox -->
+                <div class="task-checkbox">
+                    <input type="checkbox" id="taskComplete">
+                </div>
+        
+                <!-- Middle Content: Title and Dates -->
+                <div class="task-content">
+                    <div class="task-title">Task Title</div>
+                    <div class="task-dates">
+                        <div>Due: 15/10</div>
+                        <div>Complete by: 20/10</div>
+                    </div>
+                </div>
+        
+                <!-- Right Side: Task Priority -->
+                <div class="task-priority tp-high" title="High Priority"></div>
+            </div>
         </div>
     </div>
 </body>

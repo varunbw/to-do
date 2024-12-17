@@ -41,4 +41,65 @@ body {
     background-color: #e9ecef;
     padding: 20px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
+
+/* -- Task Card Container */
+.task-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 100%;
+    padding: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px 0; /* Space between task cards */
+}
+
+/* Left Side: Checkbox */
+.task-checkbox {
+    margin-right: 12px;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* Middle Content */
+.task-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.task-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.task-dates {
+    font-size: 0.9em;
+    color: #666;
+    display: flex;
+    gap: 12px;
+}
+
+/* Right Side: Priority Indicator */
+.task-priority {
+    width: 12px;
+    height: 50px;
+    border-radius: 6px;
+    background-color: #ddd;
+    margin-left: 12px;
+}
+
+/* Priority Colors */
+.tp-high { background-color: #e74c3c; } /* Red */
+.tp-med { background-color: #f39c12; }  /* Orange */
+.tp-low { background-color: #2ecc71; } /* Green */
