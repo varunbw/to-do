@@ -1,0 +1,44 @@
+/* General body styling */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Top navigation bar */
+.top-nav {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 15px;
+}
+
+.top-nav h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* Layout container */
+.layout-container {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+/* Right navigation bar */
+.left-nav {
+    background-color: #f8f9fa;
+    width: 250px;
+    padding: 20px;
+    box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Main content */
+.content {
+    flex: 1;
+    background-color: #e9ecef;
+    padding: 20px;
+    overflow-y: auto;
+}
