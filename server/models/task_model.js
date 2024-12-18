@@ -1,9 +1,18 @@
-import mongoose, { mongo } from 'mongoose'
+export const TaskSchema = {
+	userID: { type: String, required: true, default: "" },
+	sublist: { type: String, default: "" },
 
-const taskSchema = new mongoose.Schema({
-  task: { type: String, required: true },
-  completed: { type: Boolean, default: false },
-  created_at: { type: Date, default: Date.now }
-});
+	title: { type: String, required: true },
+	completed: { type: Boolean, default: false },
+	createdAt: { type: Date, default: Date.now },
+	dueDate: { type: Date, default: Date.now },
+	completeByDate: { type: Date, default: Date.now },
+	priority: {
+		type: String,
+		enum: ["low", "medium", "high"],
+		default: "medium",
+	},
+	uuid: { type: String, default: "" },
+};
 
-export default mongoose.model('Task', taskSchema);
+// export default TaskSchema;
