@@ -11,8 +11,9 @@ async function ConnectToDatabase() {
 			strict: true,
 			deprecationErrors: true,
 		},
+		tls: true,
+		tlsAllowInvalidCertificates: false,
 	});
-
 	try {
 		// Connect the client to the server
 		await client.connect();

@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-import { TaskSchema } from "../models/task_model.js";
+import Task from "../models/task_model.js";
 import { db } from "../config/connection.js";
-import { connect } from "mongoose";
 
 const collectionName = "tasks";
 
@@ -13,10 +12,10 @@ async function GetCollectionFromDB() {
 	}
 }
 
-async function GetUserTasksFromDB(userID) {
+async function GetUserTasksFromDB(givenUserID) {
 	try {
-		const collection = GetCollectionFromDB();
-		const userTasks = await collection.find({ userID }).toArray();
+		const collection = await GetCollectionFromDB();
+		const userTasks = await collection.find({ userID: givenUserID }).toArray();
 		return userTasks;
 	} catch (err) {
 		console.error(`[ERROR] GetUserTasksFromDB(): Could not fetch tasks`, err);
@@ -48,7 +47,7 @@ export const GetTasks = async (req, res) => {
 
 export const CreateTask = async (req, res) => {
 	try {
-		const newTask = new TaskSchema({
+		const newTask = new Task({
 			userID: req.body.userID,
 			sublist: req.body.sublist,
 			title: req.body.title,
@@ -61,7 +60,11 @@ export const CreateTask = async (req, res) => {
 		});
 
 		const collection = await GetCollectionFromDB();
-		await collection.insertOne(newTask);
+		console.log(typeof collection);
+
+		await collection.insertOne(newTask.toObject());
+
+		console.log(`[LOG] Created Task`, newTask.uuid);
 
 		res.status(201).send("Task created");
 	} catch (err) {

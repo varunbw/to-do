@@ -1,6 +1,7 @@
 import express from "express";
-const router = express.Router();
 import { GetTasks, CreateTask } from "../controllers/task_controller.js";
+
+const router = express.Router();
 
 router.get("/:userID", GetTasks);
 router.post("/", CreateTask);
