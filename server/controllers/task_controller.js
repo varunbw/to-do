@@ -40,7 +40,6 @@ export const GetTasks = async (req, res) => {
 		}
 
 		console.log(`[LOG] GetTasks(): Sent ${userTasks.length} tasks`);
-		
 
 		res.status(200).send(userTasks);
 	} catch (err) {
@@ -72,5 +71,40 @@ export const CreateTask = async (req, res) => {
 		res.status(201).send("Task created");
 	} catch (err) {
 		console.error("[ERROR] CreateTask(): ", err);
+	}
+};
+
+export const UpdateTask = async (req, res) => {
+	try {
+		const { uuid } = req.params;
+		const completed = req.body;
+
+		const taskCollection = await GetCollectionFromDB();
+
+		// Update the task with the given UUID
+		// const updatedTask = await Task.findOneAndUpdate(
+		// 	{ uuid }, // Find task by UUID
+		// 	{ $set: { isCompleted } }, // Update the "completed" field
+		// 	{ new: true } // Return the updated document
+		// );
+
+		const updatedTask = taskCollection.updateOne(
+			{ uuid }, // Find the task by UUID
+			{ $set: completed } // Update the "completed" field
+		);
+
+		console.log(
+			`[LOG] UpdateTask(): Updated task with UUID ${uuid}, set ${{
+				completed,
+			}}`
+		);
+
+		if (!updatedTask) {
+			return res.status(404).json({ message: "Task not found" });
+		}
+
+		res.json(updatedTask); // Send the updated task back to the client
+	} catch (err) {
+		console.error("[ERROR] UpdateTask(): ", err);
 	}
 };

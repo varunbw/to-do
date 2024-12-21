@@ -2,10 +2,10 @@
 async function FetchTasks() {
 	try {
 		// Load local JSON file
-		const response = await fetch('http://localhost:5050/tasks/1', {
-			method: 'GET',
+		const response = await fetch("http://localhost:5050/tasks/1", {
+			method: "GET",
 			headers: {
-				'Content-Type': 'application/json',
+				"Content-Type": "application/json",
 			},
 		});
 
@@ -32,6 +32,7 @@ async function RenderTasks() {
 		// task-card div
 		const taskCard = document.createElement("div");
 		taskCard.classList.add("task-card");
+		if (task.completed) taskCard.classList.add("task-completed");
 		taskCard.id = task.uuid;
 
 		// task-checkbox div
@@ -40,7 +41,7 @@ async function RenderTasks() {
 		const checkbox = document.createElement("input");
 		checkbox.type = "checkbox";
 		checkbox.checked = task.completed;
-		checkbox.id = "taskComplete";
+		checkbox.id = task.uuid;
 		checkboxDiv.appendChild(checkbox);
 
 		// task-content div
@@ -104,8 +105,8 @@ function FormatDate(dateString) {
 	return date.toLocaleDateString("en-GB"); // Returns in "DD/MM/YYYY" format
 }
 
-document.querySelector(".content").addEventListener("change", (event) => {
-	if (event.target.type === 'checkbox' && event.target.id) {
+document.querySelector(".content").addEventListener("change", async (event) => {
+	if (event.target.type === "checkbox" && event.target.id) {
 		const taskUUID = event.target.id;
 		const isCompleted = event.target.checked;
 
@@ -118,9 +119,20 @@ document.querySelector(".content").addEventListener("change", (event) => {
 		if (taskCard) {
 			if (isCompleted) {
 				taskCard.classList.add("task-completed");
-			}
-			else {
+			} else {
 				taskCard.classList.remove("task-completed");
+			}
+
+			const response = await fetch(`http://localhost:5050/tasks/${taskUUID}`, {
+				method: "PATCH",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ completed: isCompleted }),
+			});
+
+			if (!response.ok) {
+				throw new Error("Failed to update task status1");
 			}
 		}
 	}
