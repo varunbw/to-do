@@ -26,9 +26,7 @@ async function GetUserTasksFromDB(givenUserID) {
 	Get all tasks of a particular user
 	Requires the userID to search the collection
 
-	Returns
-	- status 404 if no tasks are found for the user
-	- status 200 if tasks are found, along with the tasks themselves
+	Returns nothing
 */
 export const GetTasks = async (req, res) => {
 	try {
@@ -74,6 +72,12 @@ export const CreateTask = async (req, res) => {
 	}
 };
 
+/*
+	Update details of a task
+	Currently, only modifies completion status (true/false)
+
+	Returns nothing
+*/
 export const UpdateTask = async (req, res) => {
 	try {
 		const { uuid } = req.params;
@@ -81,16 +85,10 @@ export const UpdateTask = async (req, res) => {
 
 		const taskCollection = await GetCollectionFromDB();
 
-		// Update the task with the given UUID
-		// const updatedTask = await Task.findOneAndUpdate(
-		// 	{ uuid }, // Find task by UUID
-		// 	{ $set: { isCompleted } }, // Update the "completed" field
-		// 	{ new: true } // Return the updated document
-		// );
-
 		const updatedTask = taskCollection.updateOne(
-			{ uuid }, // Find the task by UUID
-			{ $set: completed } // Update the "completed" field
+			// Filter by UUID in request
+			{ uuid },
+			{ $set: completed }
 		);
 
 		console.log(
@@ -103,7 +101,7 @@ export const UpdateTask = async (req, res) => {
 			return res.status(404).json({ message: "Task not found" });
 		}
 
-		res.json(updatedTask); // Send the updated task back to the client
+		res.status(200);
 	} catch (err) {
 		console.error("[ERROR] UpdateTask(): ", err);
 	}

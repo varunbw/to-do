@@ -1,4 +1,12 @@
-// Fetch tasks from local JSON file
+/*
+	Fetch tasks from server
+	
+	Server IP is currently coded to `localhost:5050`
+	Specify `/tasks/:userID`
+	userID is currently `1`
+
+	Returns nothing
+*/
 async function FetchTasks() {
 	try {
 		// Load local JSON file
@@ -19,7 +27,12 @@ async function FetchTasks() {
 	}
 }
 
-// Render tasks dynamically
+/*
+	Render tasks dynamically on the page
+	Calls FetchTasks() to get the tasks
+
+	Returns nothing
+*/
 async function RenderTasks() {
 	const tasks = await FetchTasks();
 
@@ -80,7 +93,11 @@ async function RenderTasks() {
 	});
 }
 
-// Helper function: Map priority to a CSS class
+/*
+	Helper function: Map priority to a CSS class
+
+	Returns appropriate class name, or nothing if invalid name is passed
+*/
 function GetPriorityClass(priority) {
 	switch (priority) {
 		case "high":
@@ -94,17 +111,31 @@ function GetPriorityClass(priority) {
 	}
 }
 
-// Helper function: Capitalize a string
+/*
+	Helper function: Capitalize a string
+	
+	Returns the capitalized string
+*/
 function CapitalizeString(str) {
 	return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// Helper function: Format date to DD/MM/YYYY
+/*
+	Helper function: Format date to DD/MM/YYYY
+
+	Returns formatted date
+*/
 function FormatDate(dateString) {
 	const date = new Date(dateString);
 	return date.toLocaleDateString("en-GB"); // Returns in "DD/MM/YYYY" format
 }
 
+/*
+	Event listener for all change events on the `content` div
+
+	Currently manages the following
+	- Checkbox that specifies task completion
+*/
 document.querySelector(".content").addEventListener("change", async (event) => {
 	if (event.target.type === "checkbox" && event.target.id) {
 		const taskUUID = event.target.id;
