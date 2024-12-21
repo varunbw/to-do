@@ -2,7 +2,13 @@
 async function FetchTasks() {
 	try {
 		// Load local JSON file
-		const response = await fetch("tasks.json");
+		const response = await fetch('http://localhost:5050/tasks/1', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+
 		if (!response.ok) {
 			throw new Error("Failed to load tasks.json");
 		}

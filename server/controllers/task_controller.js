@@ -39,6 +39,9 @@ export const GetTasks = async (req, res) => {
 			return res.status(404).send("No tasks found");
 		}
 
+		console.log(`[LOG] GetTasks(): Sent ${userTasks.length} tasks`);
+		
+
 		res.status(200).send(userTasks);
 	} catch (err) {
 		console.error("[ERROR]: GetTasks(): ", err);
