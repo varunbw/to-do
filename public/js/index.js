@@ -1,31 +1,32 @@
-// Function to fetch tasks from local JSON file
+// Fetch tasks from local JSON file
 async function FetchTasks() {
-    console.log('here');
-    
 	try {
-		const response = await fetch("tasks.json"); // Load local JSON file
+		// Load local JSON file
+		const response = await fetch("tasks.json");
 		if (!response.ok) {
 			throw new Error("Failed to load tasks.json");
 		}
-		const data = await response.json(); // Parse JSON file
-		RenderTasks(data); // Pass tasks array to rendering function
+		const data = await response.json();
+		return data;
 	} catch (error) {
 		console.error("Error:", error);
 	}
 }
 
-// Function to render tasks dynamically
-function RenderTasks(tasks) {
+// Render tasks dynamically
+async function RenderTasks() {
+	const tasks = await FetchTasks();
 
-    // Get `content` div
+	// Get `content` div
 	const contentDiv = document.querySelector(".content");
 	contentDiv.innerHTML = "<h2>Your Tasks</h2>";
 
-    // Render a task card for each task in `tasks` array
+	// Render a task card for each task in `tasks` array
 	tasks.forEach((task) => {
-        // task-card div
+		// task-card div
 		const taskCard = document.createElement("div");
-		taskCard.classList.add("task-card", "mb-3", "d-flex", "align-items-center");
+		taskCard.classList.add("task-card");
+		taskCard.id = task.uuid;
 
 		// task-checkbox div
 		const checkboxDiv = document.createElement("div");
@@ -40,19 +41,19 @@ function RenderTasks(tasks) {
 		const taskContentDiv = document.createElement("div");
 		taskContentDiv.classList.add("task-content");
 
-        // task-title div
+		// task-title div
 		const titleDiv = document.createElement("div");
 		titleDiv.classList.add("task-title");
 		titleDiv.textContent = task.title;
 
-        // task-dates div
+		// task-dates div
 		const datesDiv = document.createElement("div");
 		datesDiv.classList.add("task-dates");
 		datesDiv.innerHTML = `
           <div>Due: ${FormatDate(task.due_date)}</div>
           <div>Complete by: ${FormatDate(task.complete_by_target)}</div>`;
 
-        // Append task-title and task-dates to task-content
+		// Append task-title and task-dates to task-content
 		taskContentDiv.appendChild(titleDiv);
 		taskContentDiv.appendChild(datesDiv);
 
@@ -67,7 +68,7 @@ function RenderTasks(tasks) {
 		taskCard.appendChild(taskContentDiv);
 		taskCard.appendChild(priorityDiv);
 
-        // Append task-card to content div
+		// Append task-card to content div
 		contentDiv.appendChild(taskCard);
 	});
 }
@@ -96,3 +97,25 @@ function FormatDate(dateString) {
 	const date = new Date(dateString);
 	return date.toLocaleDateString("en-GB"); // Returns in "DD/MM/YYYY" format
 }
+
+document.querySelector(".content").addEventListener("change", (event) => {
+	if (event.target.type === 'checkbox' && event.target.id) {
+		const taskUUID = event.target.id;
+		const isCompleted = event.target.checked;
+
+		console.log(
+			`Task with ID ${taskUUID} is now ${isCompleted ? "completed" : "pending"}`
+		);
+
+		const taskCard = document.getElementById(taskUUID)?.closest(".task-card");
+
+		if (taskCard) {
+			if (isCompleted) {
+				taskCard.classList.add("task-completed");
+			}
+			else {
+				taskCard.classList.remove("task-completed");
+			}
+		}
+	}
+});

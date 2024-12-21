@@ -104,3 +104,9 @@ input[type="checkbox"] {
 .tp-high { background-color: #e74c3c; } /* Red */
 .tp-med { background-color: #f39c12; }  /* Orange */
 .tp-low { background-color: #2ecc71; } /* Green */
+
+.task-completed {
+    background-color: #e8f5e9; /* Light green */
+    text-decoration: line-through;
+    opacity: 0.7;
+}
